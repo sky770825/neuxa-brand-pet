@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>毛掌咖啡 | 寵物友善咖啡廳</title>
+    <style>
+        :root {
+            --warm-white: #FDF8F3;
+            --cream: #F5EDE0;
+            --brown: #8B6914;
+            --dark-brown: #5C3D2E;
+            --green: #6B8E4E;
+            --light-green: #A8C97F;
+            --text: #3C2415;
+            --text-light: #7A5C4A;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'Noto Sans TC', sans-serif;
+            background: var(--warm-white);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, var(--brown), var(--dark-brown));
+            color: white;
+            text-align: center;
+            padding: 60px 20px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=1200&q=80') center/cover;
+            opacity: 0.25;
+        }
+        header h1 { font-size: 2.8em; position: relative; letter-spacing: 4px; }
+        header p { font-size: 1.2em; position: relative; margin-top: 10px; opacity: 0.9; }
+        .badge {
+            display: inline-block;
+            background: var(--green);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 20px;
+            margin-top: 16px;
+            position: relative;
+            font-weight: 600;
+        }
+        nav {
+            background: white;
+            padding: 12px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav a {
+            color: var(--brown);
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 1.05em;
+        }
+        nav a:hover { color: var(--green); }
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            gap: 40px;
+        }
+        .hero-text { flex: 1; min-width: 280px; }
+        .hero-text h2 { font-size: 2em; color: var(--dark-brown); margin-bottom: 16px; }
+        .hero-text p { color: var(--text-light); font-size: 1.1em; margin-bottom: 12px; }
+        .hero-img { flex: 1; min-width: 280px; text-align: center; }
+        .hero-img img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(92,61,46,0.2);
+        }
+        .features {
+            background: var(--cream);
+            padding: 60px 20px;
+        }
+        .features h2 {
+            text-align: center;
+            font-size: 2em;
+            color: var(--dark-brown);
+            margin-bottom: 40px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            transition: transform 0.3s;
+        }
+        .feature-card:hover { transform: translateY(-5px); }
+        .feature-card .icon { font-size: 3em; margin-bottom: 16px; }
+        .feature-card h3 { color: var(--brown); margin-bottom: 10px; font-size: 1.3em; }
+        .feature-card p { color: var(--text-light); }
+        .menu {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        .menu h2 {
+            text-align: center;
+            font-size: 2em;
+            color: var(--dark-brown);
+            margin-bottom: 40px;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .menu-item {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            transition: transform 0.3s;
+        }
+        .menu-item:hover { transform: translateY(-4px); }
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .menu-item-body { padding: 20px; }
+        .menu-item-body h3 { color: var(--dark-brown); margin-bottom: 6px; }
+        .menu-item-body .price {
+            color: var(--green);
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+        .menu-item-body p { color: var(--text-light); font-size: 0.95em; }
+        .pets-section {
+            background: var(--green);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .pets-section h2 { font-size: 2em; margin-bottom: 16px; }
+        .pets-section p { font-size: 1.1em; max-width: 700px; margin: 0 auto 20px; opacity: 0.95; }
+        .pets-section .pet-icons { font-size: 2.5em; margin: 10px 0; }
+        .gallery {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        .gallery h2 { text-align: center; font-size: 2em; color: var(--dark-brown); margin-bottom: 30px; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+        .gallery-grid img:hover { transform: scale(1.05); }
+        footer {
+            background: var(--dark-brown);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.95em;
+        }
+        footer .social { margin: 12px 0; }
+        footer .social a {
+            color: var(--light-green);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        @media (max-width: 768px) {
+            header h1 { font-size: 2em; }
+            nav a { margin: 0 10px; font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🐾 毛掌咖啡</h1>
+        <p>在城市角落，與毛孩共享一杯溫暖時光</p>
+        <div class="badge">🐶 寵物友善 🐱</div>
+    </header>
+    <nav>
+        <a href="#about">關於我們</a>
+        <a href="#menu">菜單</a>
+        <a href="#pets">寵物專區</a>
+        <a href="#gallery">相簿</a>
+        <a href="#contact">聯絡我們</a>
+    </nav>
+    <section class="hero" id="about">
+        <div class="hero-text">
+            <h2>不只是咖啡廳，是毛孩的第二個家</h2>
+            <p>毛掌咖啡誕生於對咖啡與動物的熱愛。我們相信，一杯好咖啡應該與最愛的毛孩一起分享。在這裡，沒有籠子、沒有拘束，只有溫暖的木質空間與專為寵物設計的安全環境。</p>
+            <p>我們使用精品莊園咖啡豆，搭配手工烘焙甜點，並為毛孩們準備了特製寵物零食與鮮食。讓每一次的咖啡時光，都成為你與毛孩的專屬回憶。</p>
+            <p style="font-weight:600; color: var(--brown);">📍 台北市大安區忠孝東路四段 216 巷 33 號</p>
+            <p style="font-weight:600; color: var(--green);">🕐 週一至週日 09:00 - 21:00</p>
+        </div>
+        <div class="hero-img">
+            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&q=80" alt="毛掌咖啡貓咪">
+            <p style="margin-top:10px; color:var(--text-light); font-style:italic;">店貓「拿鐵」在窗邊等你 ☕</p>
+        </div>
+    </section>
+    <section class="features">
+        <h2>🌿 我們的特色</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="icon">🐾</div>
+                <h3>寵物友善空間</h3>
+                <p>寬敞無籠設計，設有寵物專屬休息區、飲水站與零食吧，讓毛孩自由探索。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">☕</div>
+                <h3>精品莊園咖啡</h3>
+                <p>嚴選衣索比亞、哥倫比亞等產區精品豆，每杯手沖都蘊含職人的用心。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🍪</div>
+                <h3>手工寵物零食</h3>
+                <p>由營養師調配的天然寵物鮮食與零食，無添加、低過敏，毛孩吃得開心又健康。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📸</div>
+                <h3>毛孩寫真服務</h3>
+                <p>每月週末提供寵物攝影服務，為你與毛孩留下最美的咖啡時光。</p>
+            </div>
+        </div>
+    </section>
+    <section class="menu" id="menu">
+        <h2>📋 人氣餐點</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80" alt="拿鐵咖啡">
+                <div class="menu-item-body">
+                    <h3>毛掌經典拿鐵</h3>
+                    <p>濃縮咖啡搭配綿密奶泡，撒上毛掌造型可可粉</p>
+                    <div class="price">NT$160</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600&q=80" alt="甜點">
+                <div class="menu-item-body">
+                    <h3>貓掌馬卡龍</h3>
+                    <p>手工法式馬卡龍，可愛貓掌造型，三種口味</p>
+                    <div class="price">NT$120</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1587734363347-91ac1453c0e0?w=600&q=80" alt="寵物零食">
+                <div class="menu-item-body">
+                    <h3>汪汪雞肉鬆餅</h3>
+                    <p>寵物專用無調味鬆餅，搭配新鮮雞肉泥</p>
+                    <div class="price">NT$90</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1600093463592-2e0a88d3ff50?w=600&q=80" alt="茶飲">
+                <div class="menu-item-body">
+                    <h3>蜜香烏龍茶</h3>
+                    <p>台灣高山蜜香烏龍，清新回甘的茶韻</p>
+                    <div class="price">NT$140</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pets-section" id="pets">
+        <div class="pet-icons">🐶 🐱 🐰 🐹</div>
+        <h2>毛孩友善宣言</h2>
+        <p>我們歡迎所有小型犬、貓咪、兔子等寵物。店內備有寵物飲水機、尿布墊、緊急醫療箱，並定期消毒確保環境衛生。戶外設有寵物專屬小花園，讓毛孩盡情奔跑。</p>
+        <p style="font-weight:700;">入店無需裝籠｜免費提供寵物飲水｜每月舉辦毛孩聚會</p>
+    </section>
+    <section class="gallery" id="gallery">
+        <h2>🖼️ 美好時光</h2>
+        <div class="gallery-grid">
+            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&q=80" alt="店內狗狗1">
+            <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80" alt="店內狗狗2">
+            <img src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=600&q=80" alt="寵物友善空間">
+            <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?w=600&q=80" alt="狗狗">
+        </div>
+    </section>
+    <footer id="contact">
+        <h3>🐾 毛掌咖啡 Mao Paw Coffee</h3>
+        <p>📍 台北市大安區忠孝東路四段 216 巷 33 號</p>
+        <p>📞 (02) 2771-0825</p>
+        <p>🕐 週一至週日 09:00 - 21:00</p>
+        <div class="social">
+            <a href="#">📷 Instagram</a>
+            <a href="#">📘 Facebook</a>
+            <a href="#">📱 LINE</a>
+        </div>
+        <p style="margin-top:16px; opacity:0.7;">© 2026 毛掌咖啡 Mao Paw Coffee. All rights reserved.</p>
+    </footer>
+</body>
+</html>
